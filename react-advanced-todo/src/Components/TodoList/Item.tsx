@@ -4,11 +4,11 @@ import React, { useState } from 'react'
 import './List.css'
 
 interface ItemProps {
-    value: number | string,
-    title: string,
-    description: string;
-    timestamp: number,
-    completed: boolean 
+    value?: number | string,
+    title?: string,
+    description?: string;
+    timestamp?: number,
+    completed?: boolean 
 }
 
 const Item: React.FC<ItemProps> = ({value, title, description, completed}) => {
