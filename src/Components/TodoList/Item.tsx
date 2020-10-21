@@ -1,38 +1,41 @@
-import { Checkbox, IconButton, ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText } from '@material-ui/core'
-import CommentIcon from '@material-ui/icons/Comment'
-import React, { useState } from 'react'
+import React from 'react'
+import { Priorities } from './EPriority'
+import { Priority } from './Priority'
+import { ReactComponent as DragIcon } from "Images/Icons/drag_indicator-24px.svg"
 import './List.css'
 
-interface ItemProps {
-    value?: number | string,
-    title?: string,
-    description?: string;
-    timestamp?: number,
-    completed?: boolean 
+export interface IItem {
+  title: string
+  exp: number
+  priority: keyof typeof Priorities
+  description?: string
+  timestamp?: number
+  completed: boolean 
 }
 
-const Item: React.FC<ItemProps> = ({value, title, description, completed}) => {
+export interface ItemProps {
+    item: IItem
+}
 
-    const [completion, setCompletion] = useState(completed)
+export const Item: React.FC<ItemProps> = ({item}) => {
+
+  const {title, description, exp, priority, completed} = item
 
     return (
-        <ListItem key={value} role={undefined} dense button onClick={() => setCompletion(!completion)}>
-        <ListItemIcon>
-          <Checkbox
-            edge="start"
-            checked={completion}
-            tabIndex={-1}
-            disableRipple
-          />
-        </ListItemIcon>
-        <ListItemText primary={title} secondary={description}/>
-        <ListItemSecondaryAction>
-          <IconButton edge="end" aria-label="comments">
-            <CommentIcon />
-          </IconButton>
-        </ListItemSecondaryAction>
-      </ListItem>
-
+      <div className="todo-wrapper">
+        <input className="checkbox" type="checkbox"></input>
+        <div className="todo-content">
+          <div className="todo-heading">
+            <div className="todo-title">{title}</div>
+            <div className="todo-exp">{exp}</div>
+          </div>
+          <div className="todo-description">{description}</div>
+        </div>
+        <Priority priority={priority} />
+        <div className="dragndrop">
+          <DragIcon fill="#CBCBCB"/>
+        </div>
+      </div>
     )
 }
 

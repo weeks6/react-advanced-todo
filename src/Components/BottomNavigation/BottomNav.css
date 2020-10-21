@@ -1,7 +1,7 @@
 .nav-wrapper {
     font-family: 'Roboto', sans-serif;
     width: 100%;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     display: flex;
     justify-content: space-around;
@@ -27,4 +27,11 @@
     color: #4B4B4B;
     fill: #4B4B4B;
     text-decoration: none;
+    transition: all .4s ease-in-out;
+}
+
+.navlink-active {
+    color: #1D1D1D;
+    fill: #1D1D1D; 
+    transform: scale(1.1)
 }

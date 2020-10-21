@@ -1,17 +1,19 @@
 import React from 'react'
-import Item from './Item'
-import {List} from '@material-ui/core'
+import { Item, IItem } from "./Item";
 
-interface ListProps {
-    items: Array<typeof Item>
+interface Props {
+    items: Array<IItem>
 }
 
-const TodoList: React.FC<ListProps> = ({items}) => {
+export const TodoList: React.FC<Props> = ({items}) => {
+
+    const listItems = items.map((item, idx) => 
+        <Item item={item} key={idx}/>
+    )
+
     return (
-        <List style={{marginBottom: "60px"}}>
-            {items}
-        </List>
+        <ul>
+            {listItems}
+        </ul>
     )
 }
-
-export default TodoList
