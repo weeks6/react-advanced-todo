@@ -12,7 +12,7 @@ export const TodoList: React.FC<Props> = ({items}) => {
     )
 
     return (
-        <ul>
+        <ul className="todo-list">
             {listItems}
         </ul>
     )

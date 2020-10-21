@@ -1,4 +1,5 @@
-ul {
+.todo-list {
+    margin-top: 8px;
     list-style: none;
     margin-bottom: 4em;
     padding: 0;
@@ -63,7 +64,6 @@ ul {
 }
 
 .todo-exp {
-    font-family: Roboto;
     font-style: normal;
     font-weight: normal;
     font-size: 10px;
