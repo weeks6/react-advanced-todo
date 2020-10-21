@@ -33,5 +33,5 @@
 .navlink-active {
     color: #1D1D1D;
     fill: #1D1D1D; 
-    transform: scale(1.1)
+    font-size: 14px;
 }
