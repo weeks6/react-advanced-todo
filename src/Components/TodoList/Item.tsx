@@ -2,6 +2,7 @@ import React from 'react'
 import { Priorities } from './EPriority'
 import { Priority } from './Priority'
 import { ReactComponent as DragIcon } from "Images/Icons/drag_indicator-24px.svg"
+import {Ripple} from "Common/ripple"
 import './List.css'
 
 export interface IItem {
@@ -14,15 +15,16 @@ export interface IItem {
 }
 
 export interface ItemProps {
-    item: IItem
+    item: IItem,
+    ripple?: boolean
 }
 
-export const Item: React.FC<ItemProps> = ({item}) => {
+export const Item: React.FC<ItemProps> = ({item, ripple}) => {
 
   const {title, description, exp, priority, completed} = item
 
     return (
-      <div className="todo-wrapper">
+      <div className="todo-wrapper" onClick={event => ripple && Ripple(event)}>
         <input className="checkbox" type="checkbox"></input>
         <div className="todo-content">
           <div className="todo-heading">

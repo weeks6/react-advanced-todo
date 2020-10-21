@@ -1,7 +1,7 @@
     
 import "Common/ripple.css"
 
-export const Ripple = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+export const Ripple = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
 
     const elementToRipple = event.currentTarget
     const rippleCircle = document.createElement('span')
@@ -9,8 +9,18 @@ export const Ripple = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) =
     const radius = diameter/2
 
     rippleCircle.style.width = rippleCircle.style.height = `${diameter}px`
-    rippleCircle.style.left = `${event.clientX - (elementToRipple.offsetLeft + radius)}px`;
-    rippleCircle.style.top = `${event.clientY - (elementToRipple.offsetTop + radius)}px`;
+
+    console.log(elementToRipple.getBoundingClientRect());
+    console.log(event.clientX)
+    console.log(event.clientY);
+    
+     
+    
+    rippleCircle.style.left = `${event.clientX - elementToRipple.getBoundingClientRect().x - radius}px`
+    rippleCircle.style.top = `${event.clientY - elementToRipple.getBoundingClientRect().y - radius}px`
+    // console.log(event.clientX)
+    // console.log(event.clientY)
+
     rippleCircle.classList.add("ripple-animate");
     
     const rippleEls = document.getElementsByClassName("ripple-animate")[0]

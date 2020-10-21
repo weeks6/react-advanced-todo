@@ -8,7 +8,7 @@ interface Props {
 export const TodoList: React.FC<Props> = ({items}) => {
 
     const listItems = items.map((item, idx) => 
-        <Item item={item} key={idx}/>
+        <Item item={item} key={idx} ripple/>
     )
 
     return (
