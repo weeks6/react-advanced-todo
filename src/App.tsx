@@ -1,48 +1,45 @@
-import { BottomNavigationAction, makeStyles } from '@material-ui/core';
-import BottomNavigation from '@material-ui/core/BottomNavigation/BottomNavigation';
-import AccountCircle from '@material-ui/icons/AccountCircleOutlined'
-import BookIcon from '@material-ui/icons/BookTwoTone'
-import ListIcon from '@material-ui/icons/ViewListOutlined'
 import React from 'react';
 import './App.css';
-import Item from './Components/TodoList/Item';
-import List from './Components/TodoList/TodoList';
-
-const MOCK_ITEMS: Array<any> = []
-
-for (let i = 0; i < 100; i++) {
-  MOCK_ITEMS.push(<Item value={i} title={"title"+i} description="random text" completed={false} timestamp={Date.now()}></Item>)
-}
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { BottomNav } from './Components/BottomNavigation/BottomNav';
+import { NavItem } from './Components/BottomNavigation/NavItem';
+import { ReactComponent as TodayIconSvg } from "Images/Icons/today-24px.svg"
+import { ReactComponent as ProjectIconSvg } from "Images/Icons/receipt_long-24px.svg"
+import { ReactComponent as ProfileIconSvg } from "Images/Icons/account_circle-24px.svg"
+import { Today } from "./Components/Today/Today";
+import { ItemsProvider, MOCKUP_ITEMS } from "./Common/State/TodoItemsContext";
 
 const App: React.FC = () => {
 
-  const useStyles = makeStyles({
-    stickToBottom: {
-      width: '100%',
-      position: 'fixed',
-      bottom: 0,
-    }
-  })
-  
-  const classes = useStyles()
-
-  const [value, setValue] = React.useState(0);
-
   return (
     <>
-      <List items={MOCK_ITEMS}></List>
-      <BottomNavigation
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
-        showLabels
-        className={classes.stickToBottom}
-      >
-        <BottomNavigationAction label="Today" icon={<ListIcon />} />
-        <BottomNavigationAction label="Projects" icon={<BookIcon />} />
-        <BottomNavigationAction label="Profile" icon={<AccountCircle />} />
-      </BottomNavigation>
+    <BrowserRouter>
+      <Switch>
+        <ItemsProvider value={MOCKUP_ITEMS}>
+          <div className="app-body">
+            <Route path="/today">
+              <Today/>
+            </Route>
+          </div>
+        </ItemsProvider>
+      </Switch>
+
+      <BottomNav>
+        <NavItem ripple to="/today">
+          <TodayIconSvg /> 
+          Today
+        </NavItem>
+        <NavItem ripple to="/projects">
+          <ProjectIconSvg /> 
+          Projects
+        </NavItem>
+        <NavItem ripple to="/profile">
+          <ProfileIconSvg /> 
+          You
+        </NavItem>
+      </BottomNav>
+
+    </BrowserRouter>
     </>
   )
 }
